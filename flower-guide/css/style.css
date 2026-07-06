@@ -1,0 +1,421 @@
+/* ============================================
+   花之百科 - 样式表
+   ============================================ */
+
+/* ---------- 变量 ---------- */
+:root {
+  --rose: #E91E63;
+  --rose-light: #F06292;
+  --rose-pale: #FCE4EC;
+  --rose-bg: #FFF5F8;
+  --sage: #66BB6A;
+  --sage-light: #81C784;
+  --sage-pale: #E8F5E9;
+  --lavender: #AB47BC;
+  --lavender-pale: #F3E5F5;
+  --amber: #FFA726;
+  --amber-pale: #FFF3E0;
+  --sky: #42A5F5;
+  --sky-pale: #E3F2FD;
+  --cream: #FDFBF7;
+  --white: #FFFFFF;
+  --text: #2D3436;
+  --text-light: #636E72;
+  --gray: #F5F2EE;
+  --shadow: 0 4px 24px rgba(233, 30, 99, 0.08);
+  --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.08);
+  --shadow-hover: 0 16px 48px rgba(233, 30, 99, 0.15);
+  --radius: 20px;
+  --radius-sm: 12px;
+  --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ---------- 重置 ---------- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+*::selection { background: var(--rose); color: #fff; }
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+
+body {
+  font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--cream);
+  color: var(--text);
+  line-height: 1.8;
+  overflow-x: hidden;
+}
+
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+button { font-family: inherit; cursor: pointer; border: none; }
+input, select { font-family: inherit; }
+
+/* ---------- 飘落花瓣背景 ---------- */
+.petal-bg {
+  position: fixed; inset: 0;
+  pointer-events: none; z-index: 0;
+  overflow: hidden;
+}
+.petal-bg .petal {
+  position: absolute; top: -20px;
+  font-size: 18px; opacity: 0;
+  animation: petalFall linear infinite;
+}
+@keyframes petalFall {
+  0%   { transform: translateY(-20px) translateX(0) rotate(0deg); opacity: 0; }
+  10%  { opacity: 0.4; }
+  90%  { opacity: 0.4; }
+  100% { transform: translateY(105vh) translateX(80px) rotate(360deg); opacity: 0; }
+}
+
+/* ---------- 导航栏 ---------- */
+.navbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  background: rgba(253, 251, 247, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(233, 30, 99, 0.08);
+  transition: all var(--transition);
+}
+.navbar.scrolled { box-shadow: 0 2px 20px rgba(0, 0, 0, 0.04); }
+.nav-container {
+  max-width: 1200px; margin: 0 auto;
+  padding: 0 24px; height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.logo { display: flex; align-items: center; gap: 8px; transition: transform var(--transition); }
+.logo:hover { transform: scale(1.05) rotate(5deg); }
+.logo-text {
+  font-family: 'ZCOOL XiaoWei', serif;
+  font-size: 22px; color: var(--rose); letter-spacing: 2px;
+}
+.nav-links { display: flex; gap: 4px; }
+.nav-link {
+  padding: 8px 16px; border-radius: 20px;
+  font-size: 14px; font-weight: 500; color: var(--text-light);
+  transition: all var(--transition);
+}
+.nav-link:hover { color: var(--rose); background: var(--rose-pale); }
+.nav-link.active { color: #fff; background: var(--rose); box-shadow: 0 4px 12px rgba(233,30,99,0.3); }
+.menu-toggle { display: none; flex-direction: column; gap: 5px; background: none; padding: 8px; }
+.menu-toggle span { width: 24px; height: 3px; background: var(--rose); border-radius: 2px; transition: var(--transition); }
+.menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
+.menu-toggle.active span:nth-child(2) { opacity: 0; }
+.menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(6px, -6px); }
+
+/* ---------- Hero ---------- */
+.hero {
+  min-height: 100vh; display: flex; align-items: center;
+  padding: 100px 24px 60px;
+  max-width: 1200px; margin: 0 auto;
+  position: relative; z-index: 1;
+}
+.hero-garden {
+  position: absolute; right: 0; bottom: 0;
+  width: 50%; height: 80%;
+  display: flex; align-items: flex-end; justify-content: center;
+  pointer-events: none;
+}
+.hero-garden svg { width: 100%; max-width: 480px; }
+.hero-content { position: relative; z-index: 2; max-width: 560px; }
+.hero-badge {
+  display: inline-block;
+  padding: 6px 16px; border-radius: 20px;
+  background: var(--rose-pale); color: var(--rose);
+  font-size: 14px; font-weight: 500; margin-bottom: 20px;
+}
+.hero-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 56px; font-weight: 900; line-height: 1.3;
+  color: var(--text); margin-bottom: 20px;
+}
+.grad-text {
+  background: linear-gradient(135deg, var(--rose), var(--lavender));
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.hero-subtitle {
+  font-size: 17px; color: var(--text-light);
+  line-height: 1.9; margin-bottom: 32px;
+}
+.hero-buttons { display: flex; gap: 14px; flex-wrap: wrap; }
+.btn {
+  padding: 12px 28px; border-radius: 28px;
+  font-size: 15px; font-weight: 700;
+  transition: all var(--transition); display: inline-block;
+}
+.btn-primary {
+  background: var(--rose); color: #fff;
+  box-shadow: 0 6px 20px rgba(233,30,99,0.3);
+}
+.btn-primary:hover { background: #C2185B; transform: translateY(-3px); box-shadow: 0 10px 28px rgba(233,30,99,0.35); }
+.btn-secondary {
+  background: var(--white); color: var(--rose);
+  border: 2px solid var(--rose-light);
+}
+.btn-secondary:hover { background: var(--rose-pale); transform: translateY(-3px); }
+
+/* ---------- 通用 Section ---------- */
+.section {
+  padding: 80px 24px;
+  max-width: 1200px; margin: 0 auto;
+  position: relative; z-index: 1;
+}
+.section-alt {
+  background: var(--white);
+  border-radius: 32px;
+  box-shadow: var(--shadow);
+  margin: 0 24px 20px;
+  max-width: calc(1200px - 48px);
+}
+.section-header { text-align: center; margin-bottom: 48px; }
+.section-emoji { font-size: 40px; display: block; margin-bottom: 12px; }
+.section-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 32px; font-weight: 700; color: var(--text); margin-bottom: 8px;
+}
+.section-desc { font-size: 16px; color: var(--text-light); }
+
+/* ---------- 四季之花 ---------- */
+.season-tabs {
+  display: flex; justify-content: center; gap: 8px;
+  margin-bottom: 36px; flex-wrap: wrap;
+}
+.season-btn {
+  padding: 12px 32px; border-radius: 28px;
+  background: var(--white); color: var(--text-light);
+  font-size: 18px; font-weight: 600;
+  border: 2px solid var(--gray);
+  transition: all var(--transition);
+}
+.season-btn:hover { border-color: var(--rose-light); color: var(--rose); transform: translateY(-2px); }
+.season-btn.active {
+  background: var(--rose); color: #fff; border-color: var(--rose);
+  box-shadow: 0 6px 20px rgba(233,30,99,0.25);
+}
+.season-content {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 24px;
+  animation: fadeUp 0.4s ease;
+}
+@keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+.season-card {
+  background: var(--white); border-radius: var(--radius);
+  overflow: hidden; box-shadow: var(--shadow);
+  transition: all var(--transition);
+  border: 2px solid transparent; text-align: center;
+  padding: 28px 20px;
+}
+.season-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-hover); border-color: var(--rose-pale); }
+.season-card .flower-svg { width: 120px; height: 120px; margin: 0 auto 16px; transition: transform var(--transition); }
+.season-card:hover .flower-svg { transform: scale(1.1) rotate(8deg); }
+.season-card h4 { font-size: 18px; color: var(--text); margin-bottom: 4px; }
+.season-card .flower-lang { font-size: 14px; color: var(--rose); font-weight: 500; margin-bottom: 8px; }
+.season-card p { font-size: 13px; color: var(--text-light); line-height: 1.6; }
+
+/* ---------- 花语词典 ---------- */
+.dict-search { max-width: 480px; margin: 0 auto 36px; }
+.dict-input {
+  width: 100%; padding: 14px 24px;
+  border-radius: 28px; border: 2px solid var(--rose-pale);
+  font-size: 16px; color: var(--text);
+  background: var(--white); transition: all var(--transition);
+}
+.dict-input:focus { outline: none; border-color: var(--rose-light); box-shadow: 0 4px 20px rgba(233,30,99,0.1); }
+.flower-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+}
+.flower-card {
+  background: var(--white); border-radius: var(--radius);
+  overflow: hidden; box-shadow: var(--shadow);
+  transition: all var(--transition);
+  border: 2px solid transparent;
+}
+.flower-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--rose-pale);
+}
+.flower-cover {
+  height: 160px; display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.flower-cover .flower-svg {
+  width: 130px; height: 130px;
+  transition: transform var(--transition); z-index: 1;
+}
+.flower-card:hover .flower-cover .flower-svg { transform: scale(1.15) rotate(8deg); }
+.flower-cover::after {
+  content: ''; position: absolute;
+  width: 80px; height: 80px;
+  background: rgba(255,255,255,0.2); border-radius: 50%;
+  top: 15px; right: 15px;
+}
+.season-badge {
+  position: absolute; top: 12px; left: 12px;
+  padding: 3px 12px; border-radius: 12px;
+  font-size: 12px; font-weight: 600; color: #fff;
+  z-index: 2;
+}
+.flower-body { padding: 20px; }
+.flower-name {
+  font-size: 19px; font-weight: 700; color: var(--text);
+  margin-bottom: 4px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.flower-en { font-size: 12px; color: var(--text-light); font-weight: 400; }
+.flower-meaning {
+  display: inline-block;
+  padding: 4px 12px; border-radius: 12px;
+  background: var(--rose-pale); color: var(--rose);
+  font-size: 13px; font-weight: 600; margin-bottom: 10px;
+}
+.flower-desc {
+  font-size: 14px; color: var(--text-light); line-height: 1.7; margin-bottom: 12px;
+}
+.flower-meta {
+  display: flex; gap: 8px; flex-wrap: wrap;
+  font-size: 12px; color: var(--text-light);
+}
+.flower-meta span {
+  display: flex; align-items: center; gap: 3px;
+  padding: 2px 8px; border-radius: 8px; background: var(--gray);
+}
+.diff-easy { background: var(--sage-pale) !important; color: #2E7D32 !important; }
+.diff-medium { background: var(--amber-pale) !important; color: #E65100 !important; }
+.diff-hard { background: var(--rose-pale) !important; color: #C62828 !important; }
+
+/* ---------- 送花指南 ---------- */
+.occasion-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 16px; margin-bottom: 32px;
+}
+.occasion-card {
+  background: var(--white); border-radius: var(--radius-sm);
+  padding: 24px 16px; text-align: center;
+  box-shadow: var(--shadow); border: 2px solid transparent;
+  transition: all var(--transition); cursor: pointer;
+}
+.occasion-card:hover { transform: translateY(-4px); border-color: var(--rose-light); }
+.occasion-card.active {
+  background: var(--rose); color: #fff;
+  border-color: var(--rose); box-shadow: 0 8px 24px rgba(233,30,99,0.3);
+}
+.occasion-card .occ-icon { font-size: 36px; display: block; margin-bottom: 8px; }
+.occasion-card .occ-name { font-size: 15px; font-weight: 600; }
+.gifting-result {
+  background: var(--rose-bg); border-radius: var(--radius);
+  padding: 32px; min-height: 120px;
+}
+.gifting-result .result-title {
+  font-size: 18px; color: var(--rose); font-weight: 700; margin-bottom: 20px;
+  text-align: center;
+}
+.gifting-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+.gifting-flower {
+  background: var(--white); border-radius: var(--radius-sm);
+  padding: 20px; text-align: center;
+  box-shadow: var(--shadow); transition: transform var(--transition);
+}
+.gifting-flower:hover { transform: translateY(-4px); }
+.gifting-flower .flower-svg { width: 80px; height: 80px; margin: 0 auto 10px; }
+.gifting-flower h5 { font-size: 16px; color: var(--text); margin-bottom: 4px; }
+.gifting-flower .gf-lang { font-size: 13px; color: var(--rose); font-weight: 500; }
+
+/* ---------- 养花技巧 ---------- */
+.care-tabs {
+  display: flex; justify-content: center; gap: 8px;
+  margin-bottom: 32px; flex-wrap: wrap;
+}
+.care-tab {
+  padding: 10px 24px; border-radius: 24px;
+  background: var(--white); color: var(--text-light);
+  font-size: 15px; font-weight: 600;
+  border: 2px solid var(--gray);
+  transition: all var(--transition);
+}
+.care-tab:hover { border-color: var(--sage-light); color: var(--sage); }
+.care-tab.active {
+  background: var(--sage); color: #fff; border-color: var(--sage);
+  box-shadow: 0 6px 16px rgba(102,187,106,0.3);
+}
+.care-content { animation: fadeUp 0.4s ease; }
+.care-panel {
+  display: flex; gap: 20px; align-items: flex-start;
+  background: var(--cream); border-radius: var(--radius-sm);
+  padding: 24px; margin-bottom: 16px;
+  transition: transform var(--transition);
+}
+.care-panel:hover { transform: translateX(6px); }
+.care-icon {
+  flex-shrink: 0; width: 52px; height: 52px;
+  border-radius: 16px; display: flex; align-items: center; justify-content: center;
+  font-size: 26px;
+}
+.care-panel-content h4 { font-size: 17px; color: var(--text); margin-bottom: 6px; }
+.care-panel-content p { font-size: 14px; color: var(--text-light); line-height: 1.8; }
+.care-tip {
+  background: var(--sage-pale); border-radius: var(--radius-sm);
+  padding: 16px 24px; margin-top: 8px;
+  display: flex; gap: 12px; align-items: center;
+}
+.care-tip .tip-emoji { font-size: 22px; }
+.care-tip p { font-size: 14px; color: #2E7D32; }
+
+/* ---------- 空状态 ---------- */
+.empty-state { text-align: center; padding: 60px 20px; }
+.empty-icon { font-size: 56px; margin-bottom: 12px; opacity: 0.4; }
+.empty-state h3 { font-size: 20px; color: var(--text); margin-bottom: 6px; }
+.empty-state p { font-size: 14px; color: var(--text-light); }
+
+/* ---------- 返回顶部 ---------- */
+.back-to-top {
+  position: fixed; bottom: 28px; right: 28px;
+  width: 50px; height: 50px; border-radius: 50%;
+  background: var(--rose); color: #fff;
+  box-shadow: 0 6px 20px rgba(233,30,99,0.35);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; visibility: hidden; transform: translateY(20px);
+  transition: all var(--transition); z-index: 500;
+}
+.back-to-top.show { opacity: 1; visibility: visible; transform: translateY(0); }
+.back-to-top:hover { background: #C2185B; transform: translateY(-4px) scale(1.1); }
+
+/* ---------- 页脚 ---------- */
+.footer {
+  text-align: center; padding: 48px 24px;
+  border-top: 2px dashed var(--rose-pale);
+  position: relative; z-index: 1;
+}
+.footer-deco { font-size: 22px; letter-spacing: 6px; margin-bottom: 16px; opacity: 0.3; }
+.footer-text { font-size: 16px; color: var(--text); font-weight: 600; margin-bottom: 4px; }
+.footer-sub { font-size: 13px; color: var(--text-light); font-family: 'Noto Serif SC', serif; }
+
+/* ---------- 响应式 ---------- */
+@media (max-width: 968px) {
+  .hero { flex-direction: column; text-align: center; padding-top: 120px; }
+  .hero-garden { position: relative; width: 100%; height: 300px; margin-top: 20px; }
+  .hero-garden svg { max-width: 340px; }
+  .hero-content { max-width: 100%; }
+  .hero-buttons { justify-content: center; }
+  .hero-title { font-size: 40px; }
+}
+@media (max-width: 768px) {
+  .nav-links {
+    position: fixed; top: 64px; left: 0; right: 0;
+    background: var(--cream); flex-direction: column;
+    padding: 16px 24px; gap: 4px;
+    border-bottom: 1px solid var(--rose-pale);
+    transform: translateY(-200%); transition: transform var(--transition);
+  }
+  .nav-links.open { transform: translateY(0); }
+  .menu-toggle { display: flex; }
+  .hero-title { font-size: 34px; }
+  .section-title { font-size: 26px; }
+  .section { padding: 60px 16px; }
+  .section-alt { margin: 0 16px 20px; padding: 60px 20px; }
+  .back-to-top { bottom: 16px; right: 16px; }
+}
