@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>花之百科 · 探索花朵的美丽世界</title>
+  <meta name="description" content="花语词典、四季之花、送花指南、养花技巧——一站式花朵百科，带你走进花的美丽世界">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=ZCOOL+XiaoWei&family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/flower-guide/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌸</text></svg>">
+</head>
+<body>
+
+<!-- 飘落花瓣背景 -->
+<div class="petal-bg" id="petalBg"></div>
+
+<!-- ========== 导航栏 ========== -->
+<nav class="navbar" id="navbar">
+  <div class="nav-container">
+    <a href="#hero" class="logo">
+      <svg width="30" height="30" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="12" fill="#FFC857"/>
+        <ellipse cx="50" cy="28" rx="10" ry="16" fill="#E91E63"/>
+        <ellipse cx="72" cy="50" rx="16" ry="10" fill="#E91E63"/>
+        <ellipse cx="50" cy="72" rx="10" ry="16" fill="#E91E63"/>
+        <ellipse cx="28" cy="50" rx="16" ry="10" fill="#E91E63"/>
+        <ellipse cx="66" cy="34" rx="10" ry="14" fill="#F06292" transform="rotate(45 66 34)"/>
+        <ellipse cx="66" cy="66" rx="10" ry="14" fill="#F06292" transform="rotate(-45 66 66)"/>
+        <ellipse cx="34" cy="66" rx="10" ry="14" fill="#F06292" transform="rotate(45 34 66)"/>
+        <ellipse cx="34" cy="34" rx="10" ry="14" fill="#F06292" transform="rotate(-45 34 34)"/>
+      </svg>
+      <span class="logo-text">花之百科</span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#hero" class="nav-link active" data-section="hero">首页</a></li>
+      <li><a href="#seasonal" class="nav-link" data-section="seasonal">四季之花</a></li>
+      <li><a href="#dictionary" class="nav-link" data-section="dictionary">花语词典</a></li>
+      <li><a href="#gifting" class="nav-link" data-section="gifting">送花指南</a></li>
+      <li><a href="#care" class="nav-link" data-section="care">养花技巧</a></li>
+    </ul>
+    <button class="menu-toggle" id="menuToggle" aria-label="菜单">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ========== Hero ========== -->
+<section class="hero" id="hero">
+  <div class="hero-garden" id="heroGarden"></div>
+  <div class="hero-content">
+    <div class="hero-badge">🌷 一站式花朵百科</div>
+    <h1 class="hero-title">探索<span class="grad-text">花朵</span>的<br>美丽世界</h1>
+    <p class="hero-subtitle">从花语到四季，从养护到赠送 ——<br>带你走进缤纷的花卉世界，发现每一朵花背后的故事</p>
+    <div class="hero-buttons">
+      <a href="#dictionary" class="btn btn-primary">🌸 浏览花语</a>
+      <a href="#seasonal" class="btn btn-secondary">🌿 四季之花</a>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 四季之花 ========== -->
+<section class="section" id="seasonal">
+  <div class="section-header">
+    <span class="section-emoji">🍂</span>
+    <h2 class="section-title">四季之花</h2>
+    <p class="section-desc">每个季节都有属于它的花，点击切换查看</p>
+  </div>
+  <div class="season-tabs" id="seasonTabs">
+    <button class="season-btn active" data-season="spring">🌸 春</button>
+    <button class="season-btn" data-season="summer">🌻 夏</button>
+    <button class="season-btn" data-season="autumn">🍁 秋</button>
+    <button class="season-btn" data-season="winter">❄️ 冬</button>
+  </div>
+  <div class="season-content" id="seasonContent"></div>
+</section>
+
+<!-- ========== 花语词典 ========== -->
+<section class="section section-alt" id="dictionary">
+  <div class="section-header">
+    <span class="section-emoji">🌺</span>
+    <h2 class="section-title">花语词典</h2>
+    <p class="section-desc">每一朵花都诉说着不同的心意</p>
+  </div>
+  <div class="dict-search">
+    <input type="text" id="dictSearch" class="dict-input" placeholder="🔍 搜索花名或花语...">
+  </div>
+  <div class="flower-grid" id="flowerGrid"></div>
+  <div class="empty-state" id="emptyState" style="display:none">
+    <div class="empty-icon">🥀</div>
+    <h3>没有找到相关花朵</h3>
+    <p>试试其他关键词吧～</p>
+  </div>
+</section>
+
+<!-- ========== 送花指南 ========== -->
+<section class="section" id="gifting">
+  <div class="section-header">
+    <span class="section-emoji">🎁</span>
+    <h2 class="section-title">送花指南</h2>
+    <p class="section-desc">不同场合送什么花？让花语替你表达心意</p>
+  </div>
+  <div class="occasion-grid" id="occasionGrid"></div>
+  <div class="gifting-result" id="giftingResult"></div>
+</section>
+
+<!-- ========== 养花技巧 ========== -->
+<section class="section section-alt" id="care">
+  <div class="section-header">
+    <span class="section-emoji">🌱</span>
+    <h2 class="section-title">养花技巧</h2>
+    <p class="section-desc">掌握五大要点，让你的花园四季常开</p>
+  </div>
+  <div class="care-tabs" id="careTabs">
+    <button class="care-tab active" data-care="light">☀️ 光照</button>
+    <button class="care-tab" data-care="water">💧 浇水</button>
+    <button class="care-tab" data-care="soil">🪴 土壤</button>
+    <button class="care-tab" data-care="fertilize">🌿 施肥</button>
+    <button class="care-tab" data-care="prune">✂️ 修剪</button>
+  </div>
+  <div class="care-content" id="careContent"></div>
+</section>
+
+<!-- ========== 返回顶部 ========== -->
+<button class="back-to-top" id="backToTop" aria-label="返回顶部">
+  <svg width="20" height="20" viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</button>
+
+<!-- ========== 页脚 ========== -->
+<footer class="footer">
+  <div class="footer-deco">🌸 🌺 🌻 🌹 🌷 🌼 🪷</div>
+  <p class="footer-text">花之百科 · 用心感受每一朵花的美好</p>
+  <p class="footer-sub">花有重开日，人无再少年 · 且赏且珍惜</p>
+</footer>
+
+<script src="/flower-guide/data.js"></script>
+<script src="/flower-guide/app.js"></script>
+</body>
+</html>
